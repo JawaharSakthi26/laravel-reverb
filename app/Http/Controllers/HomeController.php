@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SendMessage;
+use App\Jobs\TodoAdded;
 use App\Models\Message;
+use App\Models\TodoList;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -40,6 +42,36 @@ class HomeController extends Controller
         return response()->json([
             'success' => true,
             'message' => "Message created and job dispatched.",
+        ]);
+    }
+
+    public function todo_home() {
+        $user = User::where('id', auth()->id())->select([
+            'id', 'name', 'email',
+        ])->first();
+
+        return view('todo', [
+            'user' => $user,
+        ]);
+    }
+
+    public function todos(): JsonResponse {
+        $messages = TodoList::with('user')->get()->append('time');
+
+        return response()->json($messages);
+    }
+
+    public function todo(Request $request): JsonResponse {
+        $todo = TodoList::create([
+            'user_id' => auth()->id(),
+            'content' => $request->get('content'),
+        ]);
+
+        TodoAdded::dispatch($todo);
+
+        return response()->json([
+            'success' => true,
+            'message' => "Todo created and job dispatched.",
         ]);
     }
 }

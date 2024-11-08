@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '../../css/app.css';
 import ChatBox from "./ChatBox.jsx";
+import TodoList from "./ToDoList.jsx";
 
 if (document.getElementById('main')) {
     const rootUrl = "http://127.0.0.1:8000";
@@ -9,6 +10,16 @@ if (document.getElementById('main')) {
     ReactDOM.createRoot(document.getElementById('main')).render(
         <React.StrictMode>
             <ChatBox rootUrl={rootUrl} />
+        </React.StrictMode>
+    );
+}
+
+if (document.getElementById('main-todo')) {
+    const rootUrl = "http://127.0.0.1:8000";
+    
+    ReactDOM.createRoot(document.getElementById('main-todo')).render(
+        <React.StrictMode>
+            <TodoList rootUrl={rootUrl} />
         </React.StrictMode>
     );
 }

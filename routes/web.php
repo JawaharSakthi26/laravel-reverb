@@ -19,3 +19,11 @@ Route::get('/messages', [HomeController::class, 'messages'])
     ->name('messages');
 Route::post('/message', [HomeController::class, 'message'])
     ->name('message');
+
+
+Route::get('/home-todo', [HomeController::class, 'todo_home'])
+    ->name('todo_home');
+Route::get('/todos', [HomeController::class, 'todos'])
+    ->name('todos');
+Route::post('/todo', [HomeController::class, 'todo'])
+    ->name('todo');

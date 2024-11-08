@@ -2,6 +2,6 @@
 
 @section('content')
     <div class="container">
-        <div id="main" data-user="{{ json_encode($user) }}"></div>
+        <div id="main-todo" data-user="{{ json_encode($user) }}"></div>
     </div>
 @endsection
